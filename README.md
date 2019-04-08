@@ -2,7 +2,7 @@
 A Custom scripting language compiler I'm trying to write in C#
 
 # Working Examples Till Now:\n
-Basic print 'Hello World' function
+Basic print 'Hello World' function: \n
 `start
     out -> > Hello World < end
  end
