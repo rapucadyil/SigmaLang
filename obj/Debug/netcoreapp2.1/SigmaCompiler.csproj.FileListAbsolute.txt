@@ -1,0 +1,11 @@
+C:\Users\RJ-Graphics\source\repos\SigmaCompiler\bin\Debug\netcoreapp2.1\SigmaCompiler.deps.json
+C:\Users\RJ-Graphics\source\repos\SigmaCompiler\bin\Debug\netcoreapp2.1\SigmaCompiler.runtimeconfig.json
+C:\Users\RJ-Graphics\source\repos\SigmaCompiler\bin\Debug\netcoreapp2.1\SigmaCompiler.runtimeconfig.dev.json
+C:\Users\RJ-Graphics\source\repos\SigmaCompiler\bin\Debug\netcoreapp2.1\SigmaCompiler.dll
+C:\Users\RJ-Graphics\source\repos\SigmaCompiler\bin\Debug\netcoreapp2.1\SigmaCompiler.pdb
+C:\Users\RJ-Graphics\source\repos\SigmaCompiler\obj\Debug\netcoreapp2.1\SigmaCompiler.csprojAssemblyReference.cache
+C:\Users\RJ-Graphics\source\repos\SigmaCompiler\obj\Debug\netcoreapp2.1\SigmaCompiler.csproj.CoreCompileInputs.cache
+C:\Users\RJ-Graphics\source\repos\SigmaCompiler\obj\Debug\netcoreapp2.1\SigmaCompiler.AssemblyInfoInputs.cache
+C:\Users\RJ-Graphics\source\repos\SigmaCompiler\obj\Debug\netcoreapp2.1\SigmaCompiler.AssemblyInfo.cs
+C:\Users\RJ-Graphics\source\repos\SigmaCompiler\obj\Debug\netcoreapp2.1\SigmaCompiler.dll
+C:\Users\RJ-Graphics\source\repos\SigmaCompiler\obj\Debug\netcoreapp2.1\SigmaCompiler.pdb
