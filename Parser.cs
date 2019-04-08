@@ -7,6 +7,7 @@ namespace SigmaCompiler
     public enum TokenType
     {
         START,
+        ENDPRG,
         OPERATOR,
         STRING,
         NUMBER,
@@ -20,7 +21,7 @@ namespace SigmaCompiler
     {
         public string tokVal;
         public TokenType tokType;
-        
+
         public Token(string val, TokenType type)
         {
             this.tokVal = val;
@@ -37,12 +38,13 @@ namespace SigmaCompiler
 
     public class Parser
     {
-        public static List<Token> Tokenize(string input)
+        private static List<Token> Tokenize(string input)
         {
             List<Token> tokenized = new List<Token>();
 
-            foreach(var str in input.Split(new Char[] { ' ' })) {
-                switch(str)
+            foreach (var str in input.Split(new Char[] { ' ', '\t', '\r', '\n' }))
+            {
+                switch (str)
                 {
                     case Constants.STARTPROG:
                         tokenized.Add(new Token(str, TokenType.START));
@@ -65,6 +67,9 @@ namespace SigmaCompiler
                     case Constants.END_OF_STATEMENT:
                         tokenized.Add(new Token(str, TokenType.END_OF_STATEMENT));
                         break;
+                    case Constants.END_OF_PROGRAM:
+                        tokenized.Add(new Token(str, TokenType.ENDPRG));
+                        break;
                     case Constants.ARROW:
                         tokenized.Add(new Token(str, TokenType.ARROW));
                         break;
@@ -83,80 +88,42 @@ namespace SigmaCompiler
             return tokenized;
         }
 
-        public static void Interpret(List<Token> tokens)
+
+        public static SyntaxTree GenerateSyntaxTree(string sourceFile)
         {
-            for (int i = 0; i < tokens.Count; i++) {
+            List<Token> tokens = Tokenize(sourceFile);
+            SyntaxTree generatedTree = new SyntaxTree();
+
+            for (int i = 0; i < tokens.Count; i++)
+            {
                 switch(tokens[i].tokType)
                 {
                     case TokenType.OPERATOR:
                         if (tokens[i].tokVal == Constants.PRINT)
                         {
-                            if (tokens[i+1].tokType == TokenType.ARROW)
+                            generatedTree.nodes.Add(new SynTreeNode("", tokens[i].tokVal));
+                            while(tokens[i + 2].tokType != TokenType.END_OF_STATEMENT)
                             {
-                                if (tokens[i + 2].tokType == TokenType.OPERATOR 
-                                    && tokens[i + 2].tokVal == Constants.STARTLITERAL)
-                                {
-                                    List<string> toPrint = new List<string>();
-
-                                    while (tokens[i].tokVal != Constants.ENDLITERAL)
-                                    {
-                                        toPrint.Add(tokens[i + 2].tokVal);
-                                        i++;
-                                    }
-                                    for (int j = 0; j < toPrint.Count; j++)
-                                    {
-                                        if (toPrint[j] == ">")
-                                        {
-                                            toPrint.Remove(toPrint[j]);
-                                            
-                                        }
-                                        if (toPrint[j] == "<")
-                                        {
-                                            toPrint.Remove(toPrint[j]);
-
-                                        }
-                                        if (toPrint[j] == "end")
-                                        {
-                                            toPrint.Remove(toPrint[j]);
-
-                                        }
-                                    }
-                                    foreach(var str in toPrint)
-                                    {
-                                        Console.WriteLine(str);
-                                    }
-                                }
-                                else
-                                {
-                                }
+                                generatedTree.nodes[0].data += tokens[i + 2].tokVal + " ";
+                                i++;
                             }
-                            else
-                            {
-                            }
-                        }
-                        else if (tokens[i].tokVal == Constants.IF)
-                        {
-                            Console.WriteLine("Start IF found!");
-                        }
-                        else if (tokens[i].tokVal == Constants.ENDIF)
-                        {
-                            Console.WriteLine("End IF found!");
-                        }else if (tokens[i].tokVal == Constants.STARTLITERAL)
-                        {
-                            Console.WriteLine("START Literal > found");
-                        }else if (tokens[i].tokVal == Constants.ENDLITERAL)
-                        {
-                            Console.WriteLine("END Literal < found");
+                            generatedTree.nodes.Add(new SynTreeNode("", tokens[i + 2].tokVal));
                         }
                         break;
+                }
+            }
 
-                    case TokenType.ARROW:
-                        Console.WriteLine("ARROW operator found!");
-                        break;
+            return generatedTree;
+        }
 
-                    case TokenType.START:
-                        break;
-                    case TokenType.END_OF_STATEMENT:
+        public static void AnalyzeSyntaxTree(SyntaxTree compiledSyntax)
+        {
+            for (int i = 0; i < compiledSyntax.nodes.Count; i++)
+            {
+                switch(compiledSyntax.nodes[i].opr)
+                {
+                    case Constants.PRINT:
+                        Console.WriteLine(compiledSyntax.nodes[i].data);
                         break;
                 }
             }

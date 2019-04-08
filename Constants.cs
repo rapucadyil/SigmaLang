@@ -6,8 +6,9 @@ namespace SigmaCompiler
 {
     public class Constants
     {
-        public const string STARTPROG = "start";
-        public const string END_OF_STATEMENT = "end";
+        public const string STARTPROG = "STARTPROGRAM";
+        public const string END_OF_STATEMENT = "endl";
+        public const string END_OF_PROGRAM = "FINISH";
         public const string IF = "if";
         public const string ENDIF = "endif";
         public const string STARTLITERAL = ">";
